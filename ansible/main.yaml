@@ -1,0 +1,3 @@
+---
+
+- hosts: "{{ _hosts | default('localhost') }}"
