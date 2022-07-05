@@ -1,0 +1,46 @@
+---
+
+update_homebrew: false
+upgrade_homebrew_packages: false
+
+brew_taps:
+  homebrew/cask:
+  homebrew/cask-versions:
+
+brew_formulaes:
+  git:
+  htop:
+  telnet:
+  trash:
+  tree:
+  wget:
+  zsh:
+
+brew_casks:
+  appcleaner:
+  bartender:
+  bitwarden:
+  calibre:
+  clashx:
+  docker:
+  drawio:
+  dropbox:
+  feishu:
+  firefox-esr:
+  fliqlo:
+  garmin-express:
+  iterm2:
+  jetbrains-toolbox:
+  kap:
+  lyricsx:
+  maczip:
+  obsidian:
+  paw:
+  raycast:
+  snipaste:
+  spotify:
+  stats:
+  switchhosts:
+  telegram-desktop:
+  visual-studio-code:
+  vmware-fusion:

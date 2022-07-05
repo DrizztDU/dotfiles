@@ -1,3 +1,7 @@
 ---
 
 - hosts: "{{ _hosts | default('localhost') }}"
+
+  tasks:
+    - name: Package Manager
+      ansible.builtin.include_tasks: package-manager/main.yaml

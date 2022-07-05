@@ -1,0 +1,13 @@
+---
+
+upgrade_apt_packages: true
+
+apt_packages:
+  curl:
+  git:
+  htop:
+  screenfetch:
+  tree:
+  trash-cli:
+  wget:
+  zsh:

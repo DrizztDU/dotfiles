@@ -1,0 +1,41 @@
+---
+
+- name: get Homebrew's installation stat
+  ansible.builtin.stat:
+    path: /usr/local/bin/brew
+  register: _homebrew_path
+
+- name: check that Homebrew is installed
+  ansible.builtin.fail:
+    msg: "Homebrew is missing..., You should manually install it from https://brew.sh/"
+  when: not _homebrew_path.stat.exists
+
+- name: include Hombrew vars
+  ansible.builtin.include_vars: vars/homebrew.yaml
+
+- name: update Homebrew and upgrade Hombrew packages
+  ansible.builtin.homebrew:
+    update_homebrew: "{{ update_homebrew | default(false) }}"
+    upgrade_all: "{{ upgrade_homebrew_packages | default(false) }}"
+
+- name: taps Homebrew repositories
+  ansible.builtin.homebrew_tap:
+    name: "{{ item.key }}"
+    state: "{{ item.value.state | default('present') }}"
+  with_dict: "{{ brew_taps | default({}) }}"
+
+- name: manages Hombrew packages
+  ansible.builtin.homebrew:
+    name: "{{ item.key }}"
+    state: "{{ item.value.state | default('present') }}"
+    install_options: "{{ item.value.options | default(omit) }}"
+  with_dict: "{{ brew_formulaes | default({}) }}"
+
+- name: manage Hombrew casks
+  ansible.builtin.homebrew_cask:
+    name: "{{ item.key }}"
+    state: "{{ item.value.state | default('present') }}"
+  with_dict: "{{ brew_casks | default({}) }}"
+
+- name: cleanup Hombrew cache
+  ansible.builtin.shell: brew cleanup --prune=all

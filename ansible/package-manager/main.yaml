@@ -1,0 +1,9 @@
+---
+
+- name: Homebrew
+  ansible.builtin.include_tasks: homebrew.yaml
+  when: ansible_os_family == 'Darwin'
+
+- name: Apt
+  ansible.builtin.include_tasks: apt.yaml
+  when: ansible_os_family == 'Debian'

@@ -1,0 +1,25 @@
+---
+
+- name: include apt vars
+  ansible.builtin.include_vars: vars/apt.yaml
+
+- name: update apt cache and upgrade all packages
+  ansible.builtin.apt:
+    name: "*"
+    state: latest
+    update_cache: true
+  when: upgrade_apt_packages
+
+- name: install apt packages
+  ansible.builtin.apt:
+    name: "{{ item.key }}"
+    state: "{{ item.value.state | default('present') }}"
+    purge: true
+    install_recommends: false
+  with_dict: "{{ apt_packages | default({}) }}"
+
+- name: cleanup apt cache
+  ansible.builtin.apt:
+    autoclean: true
+    autoremove: true
+    clean: true
