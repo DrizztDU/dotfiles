@@ -41,7 +41,7 @@ For me, I prefer the newer version of python. But you can choose a lower version
 4. Install ansible and run ansible playbook:
 
    ```shell
-   source ~/.venv/bin/activate
+   source .venv/bin/activate
    pip install pip=='22.1.2' pip-tools=='6.7.0'
    pip-compile --no-emit-index-url requirements.in
    pip-sync requirements.txt
